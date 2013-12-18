@@ -46,6 +46,7 @@
 					</iframe>
 					<script>
 						function runRemoteCmd(cmd, value) {
+							console.log('remote command:', cmd, value);
 							switch (cmd) {
 								case 'height':
 									document.getElementById('amilia-iframe').height = parseInt(value) + 60;
