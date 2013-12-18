@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body onload="runRemoteCmd()"> 
+    <script>
+        
+        function getParam(name) {
+            name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+            var regexS = "[\\?&]" + name + "=([^&#]*)",
+                regex = new RegExp(regexS),
+                results = regex.exec(window.location.href);
+            if (results == null)
+                return "";
+            else
+                return results[1];
+        }
+        
+        function runRemoteCmd() {
+            parent.parent.runRemoteCmd(getParam('cmd'), getParam('value'));
+        }
+        
+    </script> 
+</body> 
+</html>
