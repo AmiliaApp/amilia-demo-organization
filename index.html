@@ -13,6 +13,10 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$('#url').val($('#amilia-iframe').attr('src'));
+				$('#url').keydown(function(e) {
+					if (e.keyCode == 13)
+						$('#amilia-iframe').attr('src', $(this).val());
+				});
 			});
 		</script>
 	</head>
