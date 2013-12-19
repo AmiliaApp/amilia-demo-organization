@@ -12,10 +12,24 @@
 		
 		<script type="text/javascript">
 			$(document).ready(function() {
-				$('#url').val($('#amilia-iframe').attr('src'));
-				$('#url').keydown(function(e) {
+				var $iframe = $('#amilia-iframe'),
+					$url = $('#url'),
+					$button = $('#status>button'),
+					$log = $('#status>ul');
+				
+				$url.val($iframe.attr('src'));
+				$url.keydown(function(e) {
 					if (e.keyCode == 13)
-						$('#amilia-iframe').attr('src', $(this).val());
+						$iframe.attr('src', $(this).val());
+				});
+				
+				_amilia.addListener(function(cmd, value) {
+					if ($button.hasClass('btn-default')) {
+						$button.removeClass('btn-default').addClass('btn-success');
+						$button.children('span.text').text('Receiving messages from iframe');
+					}
+					if (cmd == 'url') $url.val(value);
+					$('#status>ul').prepend('<li><a>'+cmd+' '+value+'</a></li>');
 				});
 			});
 		</script>
@@ -25,8 +39,17 @@
 			<div class="row">
 				<h1>Amilia Demo Organization</h1>
 				<p>Sample site with embedded iFrame. Type in the address of your Amilia store to see what it will look like.</p>
-				<div class="form-group">
+				<div class="form-group col-md-8">
 					<input id="url" type="text" class="form-control" />
+				</div>
+				<div class="col-md-4">
+					<div id="status" class="form-group btn-group btn-block">
+						<button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown">
+							<span class="text">No message received from iframe</span> <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+						</ul>
+					</div>
 				</div>
 			</div>
 			<div class="row">
@@ -40,19 +63,32 @@
 							scrolling="no"
 							horizontalscrolling="no"
 							verticalscrolling="no"
-							src="http://www.amilia.dev/store/en/tennis-montreal/">
+							src="http://www.amilia.com/store/en/usa-amilia-group/">
 					</iframe>
 					<script>
-						function runRemoteCmd(cmd, value) {
-							console.log('remote command:', cmd, value);
-							switch (cmd) {
-								case 'height':
-									document.getElementById('amilia-iframe').height = parseInt(value) + 60;
-									break;
-								default:
-									throw "Invalid cmd '" + cmd + "'";
+						window._amilia = {
+							listeners: [],
+							currentUrl: null,
+							runRemoteCmd: function(cmd, value) {
+								switch (cmd) {
+									case 'height':
+										document.getElementById('amilia-iframe').height = parseInt(value) + 60;
+										break;
+									case 'url':
+										_amilia.currentUrl = value;
+										break;
+									default:
+										throw "Invalid cmd '" + cmd + "'";
+								}
+								for (var i = 0; i < _amilia.listeners.length; i++)
+									_amilia.listeners[i](cmd, value);
+							},
+							addListener: function(callback) {
+								if (typeof(callback) != "function") throw "In";
+								_amilia.listeners.push(callback);
 							}
-						}
+						};
+						window.runRemoteCmd = _amilia.runRemoteCmd;
 					</script>
 				</div>
 				<!-- End of Amilia embed -->
