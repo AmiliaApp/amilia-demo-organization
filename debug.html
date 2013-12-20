@@ -63,34 +63,9 @@
 							scrolling="no"
 							horizontalscrolling="no"
 							verticalscrolling="no"
-							src="http://www.amilia.com/pages/fr/duvernay-st-vincent">
+							src="http://www.amilia.dev/pages/fr/duvernay-st-vincent">
 					</iframe>
-					<script>
-						window._amilia = {
-							listeners: [],
-							currentUrl: null,
-							runRemoteCmd: function(cmd, value) {
-								value = decodeURIComponent(value);
-								switch (cmd) {
-									case 'height':
-										document.getElementById('amilia-iframe').height = parseInt(value) + 60;
-										break;
-									case 'url':
-										_amilia.currentUrl = value;
-										break;
-									default:
-										throw "Invalid cmd '" + cmd + "'";
-								}
-								for (var i = 0; i < _amilia.listeners.length; i++)
-									_amilia.listeners[i](cmd, value);
-							},
-							addListener: function(callback) {
-								if (typeof(callback) != "function") throw "In";
-								_amilia.listeners.push(callback);
-							}
-						};
-						window.runRemoteCmd = _amilia.runRemoteCmd;
-					</script>
+					<script src="http://www.amilia.dev/scripts/amilia-iframe.js" type="text/javascript"></script>
 				</div>
 				<!-- End of Amilia embed -->
 			</div>
