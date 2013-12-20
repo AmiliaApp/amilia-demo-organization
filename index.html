@@ -70,6 +70,7 @@
 							listeners: [],
 							currentUrl: null,
 							runRemoteCmd: function(cmd, value) {
+								value = decodeURIComponent(value);
 								switch (cmd) {
 									case 'height':
 										document.getElementById('amilia-iframe').height = parseInt(value) + 60;
