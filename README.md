@@ -5,7 +5,7 @@ This demo site demonstrates how easy it is to embed your Amilia Page inside your
 
 Example
 -------
-We have created a sample site. Checkout the Amilia Demo Organization: http://ziliko.github.io/amilia-demo-organization/.
+We have created a sample site. Checkout the Amilia Demo Organization: http://amiliaapp.github.io/amilia-demo-organization/.
 
 Instructions
 ------------
@@ -30,7 +30,7 @@ Instructions
 Ensure to change AMILIA-PAGE-URL with the URL of your Amilia Page.
 
 2.  Host this file on your web site: 
-http://ziliko.github.io/amilia-demo-organization/amilia-iframe-helper.html
+http://amiliaapp.github.io/amilia-demo-organization/amilia-iframe-helper.html
 It must be located at the root of your domain. For example:
 ```
 http://www.example.com/amilia-iframe-helper.html
