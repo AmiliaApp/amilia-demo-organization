@@ -1,0 +1,46 @@
+a.navbar-brand {
+	color: #333;
+}
+
+a.navbar-brand:hover,
+a.navbar-brand:focus {
+	color: #333;
+	text-decoration: none;
+}
+
+a.navbar-brand img {
+	height: 60px;
+}
+
+a.navbar-brand span {
+	font-size: 30px;
+	padding-left: 10px;
+	vertical-align: middle;
+}
+
+.splash {
+	overflow: hidden;
+}
+
+.splash .left {
+	background-color: #f6f6f6;
+	padding: 20px;
+    padding-bottom: 100%;
+    margin-bottom: -100%;
+}
+
+footer {
+	border-top: 1px solid #ddd;
+	padding-top: 10px;
+	margin: 20px 0 0 0;
+	color: #666;
+}
+
+footer a {
+	color: #666;
+}
+
+footer a:hover,
+footer a:focus {
+	color: #333;
+}

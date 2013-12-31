@@ -4,18 +4,31 @@
 		<title>Amilia Demo Organization</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
+		<link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
 		
 		<script src="javascripts/jquery-2.0.3.min.js" type="text/javascript"></script>
 		<script src="javascripts/bootstrap.min.js" type="text/javascript"></script>
 		<link href="stylesheets/bootstrap.css" rel="stylesheet" type="text/css" charset="utf-8">
 		
+		<link href="stylesheets/main.css" rel="stylesheet" type="text/css" charset="utf-8">
 	</head>
 	<body>
+		<header class="navbar">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#"><img src="images/logo.jpg"/> <span>ABC Sports</span></a>
+				</div>
+			</div>
+		</header>
 		<div class="container">
-			<div class="row">
-				<h1>Amilia Demo Organization</h1>
-				<p>Sample site with embedded iFrame.</p>
+			<div class="row splash">
+				<div class="left col-md-6">
+					<p class="lead">ABC Sports is an example organization using Amilia to manage its subscriptions online. <a href="http://www.amilia.com/pages/sports-center-abc" target="_blank">Its catalog can be found here on Amilia.</a></p>
+					<p class="lead">ABC Sports is able to embed its catalog directly on its site, as demonstrated on this page. This is achieved with an IFRAME. You can do the same for your own site. <a href="https://github.com/AmiliaApp/amilia-demo-organization">Instructions are on Github.</a></p>
+				</div>
+				<div class="right col-md-6">
+					<img class="img-responsive" src="images/splash-800x454.jpg" />
+				</div>
 			</div>
 			<div class="row">
 				<!-- Embed this code in your page. Ensure to change src to your store. -->
@@ -34,5 +47,12 @@
 				</div>
 				<!-- End of Amilia embed -->
 			</div>
+		</div>
+		<footer>
+			<div class="container">
+				<p class="pull-left">&copy; 2014 <a href="http://www.amilia.com/en">Amilia Inc.</a></p>
+				<p class="pull-right">Embed your Amilia catalog using an IFRAME. <a href="https://github.com/AmiliaApp/amilia-demo-organization">Follow instructions on Github.</a></p>
+			</div>
+		</footer>
 	</body>
 </html>
