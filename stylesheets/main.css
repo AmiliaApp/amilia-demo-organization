@@ -23,8 +23,14 @@ a.navbar-brand span {
 }
 
 .splash .left {
-	background-color: #f6f6f6;
+	padding: 0 0 0 15px;
+    padding-bottom: 100%;
+    margin-bottom: -100%;
+}
+
+.splash .left .content {
 	padding: 20px;
+	background-color: #f6f6f6;
     padding-bottom: 100%;
     margin-bottom: -100%;
 }
