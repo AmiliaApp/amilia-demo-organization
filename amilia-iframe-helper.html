@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
-<body onload="runRemoteCmd()"> 
+<body> 
     <script>
-        
         function getParam(name) {
             name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
             var regexS = "[\\?&]" + name + "=([^&#]*)",
@@ -13,11 +12,10 @@
             else
                 return results[1];
         }
-        
         function runRemoteCmd() {
             parent.parent.runRemoteCmd(getParam('cmd'), getParam('value'));
         }
-        
-    </script> 
+		(window.addEventListener || window.attachEvent)('onload', runRemoteCmd);
+    </script>
 </body> 
 </html>
