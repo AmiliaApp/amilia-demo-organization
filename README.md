@@ -5,7 +5,7 @@ This demo site demonstrates how easy it is to embed your Amilia Catalog inside y
 
 Example
 -------
-We have created a sample site. Checkout the Amilia Demo Organization: http://amiliaapp.github.io/amilia-demo-organization/.
+We have created a sample site. Check out the Amilia Demo Organization called ABC Sports: http://amiliaapp.github.io/amilia-demo-organization/.
 
 Instructions
 ------------
@@ -21,7 +21,7 @@ Instructions
 			scrolling="no"
 			horizontalscrolling="no"
 			verticalscrolling="no"
-			src="AMILIA-CATALOG-URL
+			src="AMILIA-CATALOG-URL"
 	</iframe>
 	<script src="http://www.amilia.com/scripts/amilia-iframe.js" type="text/javascript"></script>
 </div>
