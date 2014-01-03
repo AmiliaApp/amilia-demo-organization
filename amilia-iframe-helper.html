@@ -15,7 +15,8 @@
         function runRemoteCmd() {
             parent.parent.runRemoteCmd(getParam('cmd'), getParam('value'));
         }
-		(window.addEventListener || window.attachEvent)('load', runRemoteCmd);
+		if (window.addEventListener) window.addEventListener('load', runRemoteCmd);
+		else if (window.attachEvent) window.attachEvent('onload', runRemoteCmd);
     </script>
 </body> 
 </html>
