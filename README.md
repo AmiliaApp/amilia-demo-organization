@@ -27,6 +27,7 @@ Instructions
 </div>
 <!-- End of Amilia embed -->
 ```
+
 2.  Ensure to change AMILIA-CATALOG-URL with the URL of your Amilia Catalog. It starts with `www.amilia.com/pages/...`. For example: http://www.amilia.com/pages/sports-center-abc.
 
 3.  Host this file on your web site: [amilia-iframe-helper.html](http://amiliaapp.github.io/amilia-demo-organization/amilia-iframe-helper.html). It must be located at the root of your domain. For example:
