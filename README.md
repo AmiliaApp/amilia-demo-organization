@@ -41,7 +41,7 @@ Q.  Why do I need to host amilia-iframe-helper.html on my site? <br/>
 A.  Because of the same-origin policy, the Amilia Catalog embedded in the iframe cannot talk with your Organization page. To overcome this limitation, we are able to communicate through the HTML page you host on your site. For a more technical description, please consult this article: http://stackoverflow.com/questions/153152/resizing-an-iframe-based-on-content
 
 Q.  A part of the Amilia Catalog is being cut off. I cannot see all of my actitivies. <br/>
-A.  Ensure the amilia-iframe-helper.html is located in the root of your domain. For example: www.example.com/amilia-iframe-helper.html
+A.  Ensure the amilia-iframe-helper.html is located in the root of your domain. For example: `www.example.com/amilia-iframe-helper.html`.
 
 Reporting issues
 ----------------
