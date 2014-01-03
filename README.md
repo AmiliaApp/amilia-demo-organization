@@ -43,6 +43,37 @@ A.  Because of the same-origin policy, the Amilia Catalog embedded in the iframe
 Q.  A part of the Amilia Catalog is being cut off. I cannot see all of my actitivies. <br/>
 A.  Ensure the amilia-iframe-helper.html is located in the root of your domain. For example: `www.example.com/amilia-iframe-helper.html`.
 
+Q.  I cannot server the amilia-iframe-helper.html file because I am using a site generator. <br/>
+A.  With your site generator, create a page called amilia-iframe-helper.html. Add a custom HTML code block and paste this into it:
+```
+<script>
+	/*
+	 * Amilia iframe helper HTML page. To be served on your domain root as
+	 * amilia-iframe-helper.html. For example http://www.example.com/amilia-iframe-helper.html.
+	 * Will be embedded by Amilia to communicate with your HTML page.
+	 * 
+	 * Source on Github: https://github.com/AmiliaApp/amilia-demo-organization
+	 *
+	 * Copyright 2014 Amilia.
+	 */
+	function getParam(name) {
+		name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+		var regexS = "[\\?&]" + name + "=([^&#]*)",
+			regex = new RegExp(regexS),
+			results = regex.exec(window.location.href);
+		if (results == null)
+			return "";
+		else
+			return results[1];
+	}
+	function runRemoteCmd() {
+		parent.parent.runRemoteCmd(getParam('cmd'), getParam('value'));
+	}
+	if (window.addEventListener) window.addEventListener('load', runRemoteCmd);
+	else if (window.attachEvent) window.attachEvent('onload', runRemoteCmd);
+</script>
+```
+
 Reporting issues
 ----------------
 For help on implementation, please go to http://support.amilia.com.
