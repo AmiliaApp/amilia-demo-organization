@@ -21,7 +21,7 @@ Instructions
 			scrolling="no"
 			horizontalscrolling="no"
 			verticalscrolling="no"
-			src="AMILIA-CATALOG-URL"
+			src="AMILIA-CATALOG-URL">
 	</iframe>
 	<script src="http://www.amilia.com/scripts/amilia-iframe.js" type="text/javascript"></script>
 </div>
