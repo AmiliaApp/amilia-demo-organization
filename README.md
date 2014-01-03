@@ -43,8 +43,8 @@ A.  Because of the same-origin policy, the Amilia Catalog embedded in the iframe
 Q.  A part of the Amilia Catalog is being cut off. I cannot see all of my actitivies. <br/>
 A.  Ensure the amilia-iframe-helper.html is located in the root of your domain. For example: `www.example.com/amilia-iframe-helper.html`.
 
-Q.  I cannot server the amilia-iframe-helper.html file because I am using a site generator. <br/>
-A.  With your site generator, create a page called amilia-iframe-helper.html. Add a custom HTML code block and paste this into it:
+Q.  I cannot add the amilia-iframe-helper.html fileto my web site because I am using a site generator. <br/>
+A.  With your site generator, create a page called `amilia-iframe-helper.html`. Add a custom HTML code block and paste this into it:
 ```
 <script>
 	/*
@@ -73,6 +73,7 @@ A.  With your site generator, create a page called amilia-iframe-helper.html. Ad
 	else if (window.attachEvent) window.attachEvent('onload', runRemoteCmd);
 </script>
 ```
+Save and publish. 
 
 Reporting issues
 ----------------
