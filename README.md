@@ -37,6 +37,9 @@ FAQ
 Q.  Why should I embed my Amilia Catalog on my web site? <br/>
 A.  By embedding your Amilia Catalog on your web site, your customers can remain on your site to navigate through your catalog of events.
 
+Q.  Can I embed my Amilia Store on my web site? <br/>
+A.  Not yet. We are working on that.
+
 Q.  Why do I need to host amilia-iframe-helper.html on my site? <br/>
 A.  Because of the same-origin policy, the Amilia Catalog embedded in the iframe cannot talk with your Organization page. To overcome this limitation, we are able to communicate through the HTML page you host on your site. For a more technical description, please consult this article: http://stackoverflow.com/questions/153152/resizing-an-iframe-based-on-content
 
