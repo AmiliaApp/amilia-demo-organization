@@ -28,7 +28,7 @@ Instructions
 <!-- End of Amilia embed -->
 ```
 
-2.  Ensure to change AMILIA-CATALOG-URL with the URL of your Amilia Catalog. It starts with `www.amilia.com/pages/...`. For example: http://www.amilia.com/pages/sports-center-abc.
+2.  Ensure to change AMILIA-CATALOG-URL with the URL of your Amilia Catalog. It starts with `www.amilia.com/pages/...`. For example: http://www.amilia.com/store/en/sports-center-abc/shop.
 
 3.  Host this file on your web site: [amilia-iframe-helper.html](http://amiliaapp.github.io/amilia-demo-organization/amilia-iframe-helper.html). It must be located at the root of your domain. For example: `http://www.example.com/amilia-iframe-helper.html`. This file is necessary to allow communication between your page and the Amilia iframed page. It allows Amilia to resize the iframe.
 
@@ -46,7 +46,7 @@ A.  Because of the same-origin policy, the Amilia Catalog embedded in the iframe
 Q.  A part of the Amilia Catalog is being cut off. I cannot see all of my actitivies. <br/>
 A.  Ensure the amilia-iframe-helper.html is located in the root of your domain. For example: `www.example.com/amilia-iframe-helper.html`.
 
-Q.  I cannot add the amilia-iframe-helper.html fileto my web site because I am using a site generator. <br/>
+Q.  I cannot add the amilia-iframe-helper.html file to my web site because I am using a site generator. <br/>
 A.  With your site generator, create a page called `amilia-iframe-helper.html`. Add a custom HTML code block and paste this into it:
 ```
 <script>
