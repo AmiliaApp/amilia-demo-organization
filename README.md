@@ -1,7 +1,7 @@
 Amilia Demo Organization
 ========================
 
-This demo site demonstrates how easy it is to embed your Amilia Catalog inside your organization's web site. Your clients can then consult your catalog of activities without leaving you site. Embedding is done using an iframe.
+This demo site demonstrates how easy it is to embed your Amilia Store inside your organization's web site. Your clients can then consult your catalog and make purchases without leaving your site. Embedding is done using an iframe.
 
 Example
 -------
@@ -11,7 +11,7 @@ Instructions
 ------------
 1.  Copy this code in your HTML document.
 ```
-<!-- Embed this code in your page. Ensure to change src to your store. -->
+<!-- Embed this code in your page. Make sure to change src to your store. -->
 <div id="amilia">
 	<iframe id="amilia-iframe"
 			allowtransparency="true"
@@ -21,29 +21,26 @@ Instructions
 			scrolling="no"
 			horizontalscrolling="no"
 			verticalscrolling="no"
-			src="AMILIA-CATALOG-URL">
+			src="AMILIA-STORE-URL">
 	</iframe>
 	<script src="http://www.amilia.com/scripts/amilia-iframe.js" type="text/javascript"></script>
 </div>
 <!-- End of Amilia embed -->
 ```
 
-2.  Ensure to change AMILIA-CATALOG-URL with the URL of your Amilia Catalog. It starts with `www.amilia.com/pages/...`. For example: http://www.amilia.com/store/en/sports-center-abc/shop.
+2.  Make sure to change AMILIA-STORE-URL with the URL of your Amilia Store. It starts with `www.amilia.com/store/...`. For example: http://www.amilia.com/store/en/sports-center-abc/shop.
 
 3.  Host this file on your web site: [amilia-iframe-helper.html](http://amiliaapp.github.io/amilia-demo-organization/amilia-iframe-helper.html). It must be located at the root of your domain. For example: `http://www.example.com/amilia-iframe-helper.html`. This file is necessary to allow communication between your page and the Amilia iframed page. It allows Amilia to resize the iframe.
 
 FAQ
 ---
-Q.  Why should I embed my Amilia Catalog on my web site? <br/>
-A.  By embedding your Amilia Catalog on your web site, your customers can remain on your site to navigate through your catalog of events.
-
-Q.  Can I embed my Amilia Store on my web site? <br/>
-A.  Not yet. We are working on that.
+Q.  Why should I embed my Amilia Store on my web site? <br/>
+A.  By embedding your Amilia Store on your web site, your customers can remain on your site to navigate through your catalog and make purchases.
 
 Q.  Why do I need to host amilia-iframe-helper.html on my site? <br/>
-A.  Because of the same-origin policy, the Amilia Catalog embedded in the iframe cannot talk with your Organization page. To overcome this limitation, we are able to communicate through the HTML page you host on your site. For a more technical description, please consult this article: http://stackoverflow.com/questions/153152/resizing-an-iframe-based-on-content
+A.  Because of the same-origin policy, the Amilia Store embedded in the iframe cannot talk with your organization's own page. To overcome this limitation, we are able to communicate through the HTML page you host on your site. For a more technical description, please consult this article: http://stackoverflow.com/questions/153152/resizing-an-iframe-based-on-content
 
-Q.  A part of the Amilia Catalog is being cut off. I cannot see all of my actitivies. <br/>
+Q.  A part of the Amilia Store is being cut off. I cannot see all of my actitivies. <br/>
 A.  Ensure the amilia-iframe-helper.html is located in the root of your domain. For example: `www.example.com/amilia-iframe-helper.html`.
 
 Q.  I cannot add the amilia-iframe-helper.html file to my web site because I am using a site generator. <br/>
