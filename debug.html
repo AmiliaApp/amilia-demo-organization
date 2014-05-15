@@ -13,24 +13,42 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				var $iframe = $('#amilia-iframe'),
-					$url = $('#url'),
-					$button = $('#status>button'),
-					$log = $('#status>ul');
+						$url = $('#url'),
+						$button = $('#status>button'),
+						$log = $('#status>ul');
 				
 				$url.val($iframe.attr('src'));
 				$url.keydown(function(e) {
 					if (e.keyCode == 13)
 						$iframe.attr('src', $(this).val());
 				});
-				
-				_amilia.addListener(function(cmd, value) {
+
+				function processMessage(e) {
+					var JSONdata;
+					try {
+						JSONdata = JSON.parse(e.data);
+					} catch (e) {
+						JSONdata = {};
+					}
+
 					if ($button.hasClass('btn-default')) {
 						$button.removeClass('btn-default').addClass('btn-success');
 						$button.children('span.text').text('Receiving messages from iframe');
 					}
-					if (cmd == 'url') $url.val(value);
+
+					var cmd = JSONdata.amiliaCmd;
+					var value = JSONdata.value;
+
 					$('#status>ul').prepend('<li><a>'+cmd+' '+value+'</a></li>');
-				});
+				};
+
+				// Listen for messages from iframe
+				if (window.addEventListener) {
+					window.addEventListener("message", processMessage, false);
+				} else {
+					window.attachEvent("onmessage", processMessage);
+				}
+
 			});
 		</script>
 	</head>
