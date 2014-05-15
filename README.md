@@ -9,7 +9,7 @@ We have created a sample site. Check out the Amilia Demo Organization called ABC
 
 Instructions
 ------------
-1.  Copy this code in your HTML document.
+* Copy this code in your HTML document.
 ```
 <!-- Embed this code in your page. Make sure to change src to your store. -->
 <div id="amilia">
@@ -27,7 +27,8 @@ Instructions
 </div>
 <!-- End of Amilia embed -->
 ```
-2.  Make sure to change AMILIA-STORE-URL with the URL of your Amilia Store. It starts with `www.amilia.com/store/...`. For example: http://www.amilia.com/store/en/sports-center-abc/shop.
+
+* Make sure to change AMILIA-STORE-URL with the URL of your Amilia Store. It starts with `www.amilia.com/store/...`. For example: http://www.amilia.com/store/en/sports-center-abc/shop.
 
 Reporting issues
 ----------------
