@@ -27,7 +27,6 @@ Instructions
 </div>
 <!-- End of Amilia embed -->
 ```
-
 2.  Make sure to change AMILIA-STORE-URL with the URL of your Amilia Store. It starts with `www.amilia.com/store/...`. For example: http://www.amilia.com/store/en/sports-center-abc/shop.
 
 Reporting issues
