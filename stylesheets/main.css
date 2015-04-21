@@ -18,6 +18,13 @@ a.navbar-brand span {
 	vertical-align: middle;
 }
 
+.nav li:hover .btn-primary:hover,
+.nav li:hover .btn-primary:focus {
+  color: #ffffff;
+  background-color: #3276b1;
+  border-color: #285e8e;
+}
+
 .splash {
 	position: relative;
 	overflow: hidden;
