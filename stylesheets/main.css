@@ -8,16 +8,6 @@ a.navbar-brand:focus {
 	text-decoration: none;
 }
 
-a.navbar-brand img {
-	height: 60px;
-}
-
-a.navbar-brand span {
-	font-size: 30px;
-	padding-left: 10px;
-	vertical-align: middle;
-}
-
 .nav li:hover .btn-primary:hover,
 .nav li:hover .btn-primary:focus {
   color: #ffffff;
