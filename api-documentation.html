@@ -36,33 +36,21 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-10">
+                    <div class="alert alert-info">Looking for the previous documentation <a href="api-documentation-v1.html">(v1)</a> ?</div>
                     <section id="concepts-section">
-                        <h1>Amilia Public API Documentation</h1>
-                        <h4>Looking for the previous documentation <a href="api-documentation-v1.html">(v1)</a> ?</h4>
                         <p>
-                            The Amilia API allows an organization to fetch information.
-                            Currently, the API is limited to public calls without authentication.
-                            The API returns JSON.
+                            The Amilia API allows an organization to fetch most of the information that is public facing on their store page.
+                            Currently, the API is limited to public calls without authentication and does not allow any modification to the data. The API returns JSON.
                         </p>
-                        <h2>Base URL</h2>
-                        <p>
-                            All calls are performed from the PublicApi endpoint. In addition, calls take two path arguments RewriteUrl and Lang.
+                        <h3>Base URL</h3>
+                        <p>Through the documentation data that is meant to be replaced with your own values is surrounded by square brackets (<code>[like this]</code>). </p>
+                        <p>All the endpoints of the api share the same root URL: <code>https://www.amilia.com/PublicApi/[rewriteUrl]/[lang]/</code>.</p>
+                        <ul>
+                            <li><code>rewriteUrl</code> represents your unique organization token. This is the same token used in your amilia storefront url. It can be found in your Amilia <strong>Account</strong> under <strong>Options</strong>.</li>
+                            <li><code>lang</code> represents the language in which the localizable values should be returned. The currently supported values are either <code>fr</code> or <code>en</code>. Localization is only applied to values, the attribute names and urls are not localized</li>
+                        </ul>
                         </p>
-                        <p><code>https://www.amilia.com/PublicApi/[rewriteUrl]/[lang]/</code></p>
-                        <p>
-                            Argument <code>RewriteUrl</code> represents your organization and is unique to you.
-                            It can be found in your Amilia <strong>Account</strong> under <strong>Options</strong>.
-                        </p>
-                        <h2>Localization</h2>
-                        <p>
-                            The API always returns localized information.
-                            Since in Amilia, some user-input can be either in French or English, you must always specify the language your are fetching for.
-                            Argument <code>lang</code> can either be <code>fr</code> or <code>en</code>.
-                        </p>
-                        <p>
-                           Localization is only applied to values, the attribute names and urls are not localized. 
-                        </p>
-                        <h2>Pagination</h2>
+                        <h3>Pagination</h3>
                         <p>
                             Some endpoints do pagination using cursors.
                             Paginated responses should all follow the following form;
@@ -82,17 +70,14 @@
 
                             A limit query string parameter can always be used to control the page size, allowing some kind of control over the expected payload response.
                         </p>
-                        <blockquote>
-                            You can test the API directly here in your browser.
-                            Examples GET calls provided are called using jQuery <code>$.get</code>.
-                            Just hit F12 to open a developer console, and type in the example GET calls documented below.
-                        </blockquote>
+                        <h3>Taking the API for a test drive</h3>
+                        <p>You can test the API directly here in your browser. Examples GET calls provided are called using jQuery <code>$.get</code>.                        Just hit F12 to open a developer console, and type in the example GET calls documented below.</p>
                     </section>
-
+                    <hr />
                     <section id="programs-section">
-                        <h2>Programs</h2>
+                        <h1>Programs</h1>
                         <div id="programs-list" class="api-method">
-                            <h3>Listing programs <span class="label label-info">paged</span></h4>
+                            <h2>Listing programs <span class="label label-info">paged</span></h2>
                             <p><code>/PublicApi/[RewriteUrl]/[Lang]/Programs</code></p>
                             <p>Allows listing the available programs you have defined.
 
@@ -107,7 +92,7 @@
                             </table>
                             </p>
                             <h4>Example</h4>
-                            <pre>$.get('https://www.amilia.com/PublicApi/usa-amilia-group/en/Programs')</pre>
+                            <pre>$.get('https://www.amilia.com/PublicApi/usa-amilia-group/en/Programs?archived=false&offline=false')</pre>
                             <h4>Result</h4>
                             <pre>
 {
@@ -132,7 +117,7 @@
 }</pre>
                         </div>
                         <div id="programs-get" class="api-method">
-                            <h3>Get a program by id</h4>
+                            <h2>Get a program by id</h2>
                             <p><code>/PublicApi/[RewriteUrl]/[Lang]/Programs/[Id]</code></p>
                             <p>Simply fetches the associated program</p>
                             <h4>Example</h4>
@@ -145,7 +130,7 @@
 }</pre>
                         </div>
                         <div id="programs-get-activities" class="api-method">
-                            <h3>List activities of a program <span class="label label-info">paged</span></h4>
+                            <h2>List activities of a program <span class="label label-info">paged</span></h2>
                             <p><code>/PublicApi/[RewriteUrl]/[Lang]/Programs/[Id]/Activities</code></p>
                             <p>Lists all the activities available under a certain program. The list of activities returned are ordered by id.
 
@@ -268,10 +253,11 @@
 }</pre>
                         </div>
                     </section>
-
+                    <hr />
                     <section id="activities-section">
+                        <h1>Activities</h1>
                         <div id="activities-get" class="api-method">
-                            <h2>Activities</h2>
+                            <h2>Fetch an activity by id</h2>    
                             <p><code>/PublicApi/[RewriteUrl]/[Lang]/Activities/[Id]</code></p>
                             <p>
                                 Fetch a single activity, by id.
@@ -330,10 +316,11 @@
 }</pre>
                         </div>
                     </section>
+                    <hr />
                     <section id="tags-section">
-                        <h2 id="tags-section">Tags</h2>
+                        <h1>Tags</h1>
                         <div id="tags-list" class="api-method">
-                            <h3>List available tags</h4>
+                            <h2>List available tags</h2>
                             <p><code>/PublicApi/[RewriteUrl]/[Lang]/Tags</code></p>
                             <p>Lists all the tags that have been defined for your organization</p>
                             <h4>Example</h4>
@@ -361,7 +348,7 @@
 ]</pre>
                         </div>
                         <div id="tags-get" class="api-method">
-                            <h3>Fetch a tag by id</h4>
+                            <h2>Fetch a tag by id</h2>
                             <p><code>/PublicApi/[RewriteUrl]/[Lang]/Tags/[Id]</code></p>
                             <p>Simply fetches a tag by id</p>
                             <h4>Example</h4>
@@ -375,7 +362,7 @@
 }</pre>
                         </div>
                         <div id="tags-list-activities" class="api-method">
-                            <h3>Fetch the list of activities which have the given tag</h4>
+                            <h2>Fetch the list of activities which have the given tag</h2>
                             <p><code>/PublicApi/[RewriteUrl]/[Lang]/Tags/[Id]/Activities?v2</code></p>
                             <p>Fetches the list of activities for a given tag. This is used by many to give fine grained control over a grouping of activities when the programs structure is not-ideal</p>
                             <p class="alert alert-warning">There's two versions of this API, we highly suggest using the version2 (v2) as we plan to deprecate the first version in the future</p></blockquote>
