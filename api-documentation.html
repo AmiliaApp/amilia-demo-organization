@@ -9,9 +9,7 @@
 		<script src="javascripts/jquery-2.0.3.min.js" type="text/javascript"></script>
 		<script src="javascripts/bootstrap.min.js" type="text/javascript"></script>
 		<link href="stylesheets/bootstrap.css" rel="stylesheet" type="text/css" charset="utf-8">
-		
 		<link href="stylesheets/main.css" rel="stylesheet" type="text/css" charset="utf-8">
-
 		<link href="https://www.amilia.com/scripts/amilia-iframe.css" rel="stylesheet" type="text/css" charset="utf-8">
 	</head>
 	<body>
@@ -37,45 +35,298 @@
 		</header>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
-					<h1>Amilia Public API Documentation</h1>
-					<p>
-						The Amilia API allows an organization to fetch information.
-						Currently, the API is limited to public calls without authentication.
-						The API returns JSON.
-					</p>
-					<p>
-						All calls are performed from the PublicApi endpoint. In addition, calls take two path arguments RewriteUrl and Lang.
-					</p>
-					<p><code>https://www.amilia.com/PublicApi/[rewriteUrl]/[lang]/</code></p>
-					<p>
-						Argument <code>RewriteUrl</code> represents your organization and is unique to you.
-						It can be found in your Amilia <strong>Account</strong> under <strong>Options</strong>.
-					</p>
-					<p>
-						The API always returns localized information.
-						Since in Amilia, some user-input can be either in French or English, you must always specify the language your are fetching for.
-						Argument <code>lang</code> can either be <code>fr</code> or <code>en</code>.
-					</p>
-					<blockquote>
-						You can test the API directly here in your browser.
-						Examples GET calls provided are called using jQuery <code>$.get</code>.
-						Just hit F12 to open a developer console, and type in the example GET calls documented below.
-					</blockquote>
+				<div class="col-md-10">
+                    <div class="alert alert-info">Looking for the previous documentation <a href="api-documentation-v1.html">(v1)</a> ?</div>
+                    <section id="concepts-section">
+                        <p>
+                            The Amilia API allows an organization to fetch most of the information that is public facing on their store page.
+                            Currently, the API is limited to public calls without authentication and does not allow any modification to the data. The API returns JSON.
+                        </p>
+                        <h3>Base URL</h3>
+                        <p>Through the documentation data that is meant to be replaced with your own values is surrounded by square brackets (<code>[like this]</code>). </p>
+                        <p>All the endpoints of the api share the same root URL: <code>https://www.amilia.com/PublicApi/[rewriteUrl]/[lang]/</code>.</p>
+                        <ul>
+                            <li><code>rewriteUrl</code> represents your unique organization token. This is the same token used in your amilia storefront url. It can be found in your Amilia <strong>Account</strong> under <strong>Options</strong>.</li>
+                            <li><code>lang</code> represents the language in which the localizable values should be returned. The currently supported values are either <code>fr</code> or <code>en</code>. Localization is only applied to values, the attribute names and urls are not localized</li>
+                        </ul>
+                        </p>
+                        <h3>Pagination</h3>
+                        <p>
+                            Some endpoints do pagination using cursors, these will be marked with a <span class="label label-info">paged</span> label.
+                            Paginated responses should all follow the following form;
+                            
+                            <pre>
+{
+    "Items": [],
+    "Page": {
+        "NextId": int|string,
+        "Next": url
+    }
+}
+                            </pre>
 
-					<h2>Tags</h2>
-					<p><code>/PublicApi/[RewriteUrl]/[Lang]/Tags</code></p>
-					<p>
-						The <code>tags</code> API allows you to retrieve the list of tags you have defined in Amilia.
-						You can then fetch activities provided a tag.
-						Tags can be defined in your Amilia <strong>Account</strong> under <strong>Tags</strong>.
-						You can then attach them to your activities.
-					</p>
-					<h3>Example</h3>
-					<pre>$.get('https://www.amilia.com/PublicApi/usa-amilia-group/en/Tags');</pre>
-					<h3>Result</h3>
-					<pre>
-[
+                            Items should contain a list of the requested items.
+                            Page.Next is meant to be the url to request the next page of data. This field is null if there's no more data to fetch.
+
+                            A limit query string parameter can always be used to control the page size, allowing some kind of control over the expected payload response.
+                        </p>
+                        <h3>Taking the API for a test drive</h3>
+                        <p>You can test the API directly here in your browser. Examples GET calls provided are called using jQuery <code>$.get</code>.                        Just hit F12 to open a developer console, and type in the example GET calls documented below.</p>
+                    </section>
+                    <hr />
+                    <section id="programs-section">
+                        <h1>Programs</h1>
+                        <div id="programs-list" class="api-method">
+                            <h2>Listing programs <span class="label label-info">paged</span></h2>
+                            <p><code>/PublicApi/[RewriteUrl]/[Lang]/Programs</code></p>
+                            <p>Allows listing the available programs you have defined.
+
+                            The following query string options are available
+                            <table class="table">
+                                <thead>
+                                    <tr><td>option name</td><td>default value (if not specified)</td></tr>
+                                <tbody>
+                                    <tr><td>archived</td><td>false</td><td>include programs that have been archived</td></tr>
+                                    <tr><td>offline</td><td>false</td><td>include programs that are not visible to clients</td></tr>
+                                </tbody>
+                            </table>
+                            </p>
+                            <h4>Example</h4>
+                            <pre>$.get('https://www.amilia.com/PublicApi/usa-amilia-group/en/Programs?archived=false&offline=false')</pre>
+                            <h4>Result</h4>
+                            <pre>
+{
+  "Items": [
+    {
+      "Id": 8680,
+      "Name": "Professional Events"
+    },
+    {
+      "Id": 8688,
+      "Name": "Recreational Events / Activities "
+    },
+    {
+      "Id": 9173,
+      "Name": "Spring Schedule: Jan 2 - April 30, 2014"
+    }
+  ],
+  "Page": {
+    "NextId": null,
+    "Next": null
+  }
+}</pre>
+                        </div>
+                        <div id="programs-get" class="api-method">
+                            <h2>Get a program by id</h2>
+                            <p><code>/PublicApi/[RewriteUrl]/[Lang]/Programs/[Id]</code></p>
+                            <p>Simply fetches the associated program</p>
+                            <h4>Example</h4>
+                            <pre>$.get('https://www.amilia.com/PublicApi/usa-amilia-group/en/Programs/9173')</pre>
+                            <h4>Result</h4>
+                            <pre>
+{
+  "Id": 9173,
+  "Name": "Spring Schedule: Jan 2 - April 30, 2014"
+}</pre>
+                        </div>
+                        <div id="programs-get-activities" class="api-method">
+                            <h2>List activities of a program <span class="label label-info">paged</span></h2>
+                            <p><code>/PublicApi/[RewriteUrl]/[Lang]/Programs/[Id]/Activities</code></p>
+                            <p>Lists all the activities available under a certain program. The list of activities returned are ordered by id.
+
+                            The following query string options are available
+                            <table class="table">
+                                <thead>
+                                    <tr><td>option name</td><td>default value (if not specified)</td><td>min/max values</tr>
+                                <tbody>
+                                    <tr><td>limit</td><td>100</td><td>5-100</td><td>how many activities to return per page</td></tr>
+                                    <tr><td>idStart</td><td>0</td><td></td><td>minimum activity id to return</td></tr>
+                                </tbody>
+                            </table></p>
+                            <h4>Example</h4>
+                            <pre>$.get('https://www.amilia.com/PublicApi/usa-amilia-group/en/Programs/9173/Activities')</pre>
+                            <h4>Result <button type="button" class="btn btn-xs btn-info" data-toggle="collapse" data-target="#programs-get-activities-example">(show/hide)</a></h4>
+                            <pre id="programs-get-activities-example" class="collapse">
+{
+  "Items": [
+    {
+      "Id": 630186,
+      "Name": "(C) Acrobatics (Beg) / 9 yrs - Teen / 4pm - 5:25pm / (Beginner)",
+      "Description": "",
+      "ResponsibleName": "",
+      "Prerequisite": "",
+      "Note": "",
+      "ExtraInformation": "",
+      "Url": null,
+      "LegacyLocation": "",
+      "Price": 50.0000,
+      "Schedule": [
+        {
+          "StartTime": "16:00:00",
+          "EndTime": "17:25:00",
+          "StartDate": "2014-01-06T00:00:00",
+          "EndDate": "2014-01-06T00:00:00",
+          "RecurenceEndDate": null,
+          "Occurences": 0,
+          "Staff": [
+            
+          ],
+          "Facilities": [
+            
+          ],
+          "ExceptOccurences": [
+            
+          ],
+          "Days": [
+            
+          ]
+        }
+      ],
+      "Age": {
+        "Max": 99,
+        "Min": 1,
+        "Months": false
+      },
+      "TaxCredit": null,
+      "SpotsRemaining": 2147483645,
+      "SpotsReserved": 2,
+      "ShortScheduleString": "4:00 PM",
+      "HasSessionEnabled": true,
+      "AgeSummary": "1-99",
+      "SubCategoryName": "Monday's Classes",
+      "CategoryName": "Week of January 6th, 2014",
+      "ProgramName": "Spring Schedule: Jan 2 - April 30, 2014"
+    },
+    {
+      "Id": 630191,
+      "Name": "(C) Trapeze (Static), Rope & Tissue / 9 yrs - Teen / 5:30pm - 6:55pm / (Beg-Mixed Levels)",
+      "Description": "",
+      "ResponsibleName": "",
+      "Prerequisite": "",
+      "Note": "",
+      "ExtraInformation": "",
+      "Url": null,
+      "LegacyLocation": "",
+      "Price": 38.0000,
+      "Schedule": [
+        {
+          "StartTime": "17:30:00",
+          "EndTime": "18:55:00",
+          "StartDate": "2014-01-13T00:00:00",
+          "EndDate": "2014-01-13T00:00:00",
+          "RecurenceEndDate": null,
+          "Occurences": 0,
+          "Staff": [
+            
+          ],
+          "Facilities": [
+            
+          ],
+          "ExceptOccurences": [
+            
+          ],
+          "Days": [
+            
+          ]
+        }
+      ],
+      "Age": {
+        "Max": 15,
+        "Min": 9,
+        "Months": false
+      },
+      "TaxCredit": null,
+      "SpotsRemaining": 2147483647,
+      "SpotsReserved": 0,
+      "ShortScheduleString": "5:30 PM",
+      "HasSessionEnabled": true,
+      "AgeSummary": "9-15",
+      "SubCategoryName": "Monday's Classes",
+      "CategoryName": "Week of January 13, 2014",
+      "ProgramName": "Spring Schedule: Jan 2 - April 30, 2014"
+    }
+  ],
+  "Page": {
+    "NextId": 630191,
+    "Next": "https://www.amilia.com/PublicApi/usa-amilia-group/en/Programs/9173/Activities?idStart=630191&limit=5"
+  }
+}</pre>
+                        </div>
+                    </section>
+                    <hr />
+                    <section id="activities-section">
+                        <h1>Activities</h1>
+                        <div id="activities-get" class="api-method">
+                            <h2>Fetch an activity by id</h2>    
+                            <p><code>/PublicApi/[RewriteUrl]/[Lang]/Activities/[Id]</code></p>
+                            <p>
+                                Fetch a single activity, by id.
+                            </p>
+                            <h3>Example</h3>
+                            <pre>$.get('https://www.amilia.com/PublicApi/usa-amilia-group/en/Activities/630191');</pre>
+                            <h3>Result</h3>
+                            <pre>
+{
+  "Id": 630191,
+  "Name": "(C) Trapeze (Static), Rope & Tissue / 9 yrs - Teen / 5:30pm - 6:55pm / (Beg-Mixed Levels)",
+  "Description": "",
+  "ResponsibleName": "",
+  "Prerequisite": "",
+  "Note": "",
+  "ExtraInformation": "",
+  "Url": "https://www.amilia.com/store/en/usa-amilia-group/shop/activities/630191",
+  "LegacyLocation": "",
+  "Price": 38.0000,
+  "Schedule": [
+    {
+      "StartTime": "17:30:00",
+      "EndTime": "18:55:00",
+      "StartDate": "2014-01-13T00:00:00",
+      "EndDate": "2014-01-13T00:00:00",
+      "RecurenceEndDate": null,
+      "Occurences": 0,
+      "Staff": [
+        
+      ],
+      "Facilities": [
+        
+      ],
+      "ExceptOccurences": [
+        
+      ],
+      "Days": [
+        
+      ]
+    }
+  ],
+  "Age": {
+    "Max": 15,
+    "Min": 9,
+    "Months": false
+  },
+  "TaxCredit": null,
+  "SpotsRemaining": 2147483647,
+  "SpotsReserved": 0,
+  "ShortScheduleString": "5:30 PM",
+  "HasSessionEnabled": true,
+  "AgeSummary": "9-15",
+  "SubCategoryName": "Monday's Classes",
+  "CategoryName": "Week of January 13, 2014",
+  "ProgramName": "Spring Schedule: Jan 2 - April 30, 2014"
+}</pre>
+                        </div>
+                    </section>
+                    <hr />
+                    <section id="tags-section">
+                        <h1>Tags</h1>
+                        <div id="tags-list" class="api-method">
+                            <h2>List available tags</h2>
+                            <p><code>/PublicApi/[RewriteUrl]/[Lang]/Tags</code></p>
+                            <p>Lists all the tags that have been defined for your organization</p>
+                            <h4>Example</h4>
+                            <pre>$.get('https://www.amilia.com/PublicApi/usa-amilia-group/en/Tags')</pre>
+                            <h4>Result</h4>
+                            <pre>[
   {
     "Id": 1051050,
     "Name": "Art",
@@ -94,166 +345,164 @@
     "Color": "red",
     "Icon": null
   }
-]
-					</pre>
-					<br/>
-
-					<h2>Activities</h2>
-					<p><code>/PublicApi/[RewriteUrl]/[Lang]/Tags/[Id]/Activities</code></p>
-					<p>
-						You can fetch activities attached to a tag with this call.
-						It returns a list of activities that include the schedule information, available spots, price, etc.
-					</p>
-					<h3>Example</h3>
-					<pre>$.get('https://www.amilia.com/PublicApi/usa-amilia-group/en/Tags/1051050/Activities');</pre>
-					<h3>Result</h3>
-					<pre>
-[
-  {
-    "Id": 593490,
-    "Name": "Pottery Class",
-    "Description": "Pottery classes in our building",
-    "Prerequisite": "must bring clay",
-    "Note": "Picasso won't be there - but Mr Rogers will be there - who is nearly as good",
-    "ExtraInformation": "",
-    "AgeMin": 11,
-    "AgeMax": 99,
-    "AgeInMonths": false,
-    "EffectiveBirthDay": null,
-    "Sex": null,
-    "Price": 99,
-    "TaxStatus": 0,
-    "MaxAttendance": 2147483647,
-    "MaxPreAttendance": 2147483647,
-    "ReservedPlaces": 0,
-    "Location": "Amilia Building",
-    "ResponsibleName": "Alastair Monk",
-    "NbSegments": 4,
-    "HasDropInEnabled": false,
-    "HasSessionEnabled": true,
-    "NbPlacesLeft": null,
-    "Schedule": {
-      "Id": 927970,
-      "TimePeriod": {
-        "Id": 927970,
-        "StartTime": "11:00:00",
-        "EndTime": "00:00:00",
-        "Type": 2,
-        "DayMask": 16,
-        "StartDate": "2014-03-05T00:00:00",
-        "EndDate": null,
-        "NbOccurences": 4,
-        "RecurrenceEndDate": "2014-03-31T00:00:00",
-        "TimePeriodType": 2
-      },
-      "Address": null
-    },
-    "ShortBeginString": null,
-    "Url": null,
-    "SubCategoryId": 593487,
-    "Position": 0,
-    "State": 0
-  },
+]</pre>
+                        </div>
+                        <div id="tags-get" class="api-method">
+                            <h2>Fetch a tag by id</h2>
+                            <p><code>/PublicApi/[RewriteUrl]/[Lang]/Tags/[Id]</code></p>
+                            <p>Simply fetches a tag by id</p>
+                            <h4>Example</h4>
+                            <pre>$.get('https://www.amilia.com/PublicApi/usa-amilia-group/en/Tags/1051050')</pre>
+                            <h4>Result</h4>
+                            <pre>{
+  "Id": 1051050,
+  "Name": "Art",
+  "Color": "orange",
+  "Icon": null
+}</pre>
+                        </div>
+                        <div id="tags-list-activities" class="api-method">
+                            <h2>Fetch the list of activities which have the given tag</h2>
+                            <p><code>/PublicApi/[RewriteUrl]/[Lang]/Tags/[Id]/Activities?v2</code></p>
+                            <p>Fetches the list of activities for a given tag. This is used by many to give fine grained control over a grouping of activities when the programs structure is not-ideal</p>
+                            <p class="alert alert-warning">There's two versions of this API, we highly suggest using the version2 (v2) as we plan to deprecate the first version in the future</p></blockquote>
+                            <h4>Example</h4>
+                            <pre>$.get('https://www.amilia.com/PublicApi/usa-amilia-group/en/Tags/1051050/Activities?v2')</pre>
+                            <h4>Result <button type="button" class="btn btn-xs btn-info" data-toggle="collapse" data-target="#tags-list-activities-example">(show/hide)</a></h4>
+                            <pre id="tags-list-activities-example" class="collapse">[
   {
     "Id": 593497,
     "Name": "Lego Building",
     "Description": "Lego Building classes in our building",
+    "ResponsibleName": "Alastair Monk",
     "Prerequisite": "must bring Lego!",
     "Note": "All children must be toilet trained",
     "ExtraInformation": "",
-    "AgeMin": 4,
-    "AgeMax": 16,
-    "AgeInMonths": false,
-    "EffectiveBirthDay": null,
-    "Sex": null,
-    "Price": 10,
-    "TaxStatus": 0,
-    "MaxAttendance": 2147483647,
-    "MaxPreAttendance": 2147483647,
-    "ReservedPlaces": 0,
-    "Location": "Amilia Building",
-    "ResponsibleName": "Alastair Monk",
-    "NbSegments": 107,
-    "HasDropInEnabled": false,
-    "HasSessionEnabled": true,
-    "NbPlacesLeft": null,
-    "Schedule": {
-      "Id": 927267,
-      "TimePeriod": {
-        "Id": 927267,
+    "Url": "https://www.amilia.com/store/en/usa-amilia-group/shop/activities/593497",
+    "LegacyLocation": "Amilia Building",
+    "Price": 10.0000,
+    "Schedule": [
+      {
         "StartTime": "00:00:00",
         "EndTime": "23:59:59",
-        "Type": 2,
-        "DayMask": 4,
         "StartDate": "2014-08-15T00:00:00",
         "EndDate": null,
-        "NbOccurences": 107,
-        "RecurrenceEndDate": "2016-09-04T00:00:00",
-        "TimePeriodType": 2
-      },
-      "Address": null
+        "RecurenceEndDate": "2016-09-04T00:00:00",
+        "Occurences": 0,
+        "Staff": [
+          
+        ],
+        "Facilities": [
+          
+        ],
+        "ExceptOccurences": [
+          
+        ],
+        "Days": [
+          "Tuesday"
+        ]
+      }
+    ],
+    "Age": {
+      "Max": 16,
+      "Min": 4,
+      "Months": false
     },
-    "ShortBeginString": null,
-    "Url": null,
-    "SubCategoryId": 593487,
-    "Position": 1,
-    "State": 0
-  },
-  {
-    "Id": 623623,
-    "Name": "Mike D's Heavy Metal Crash Course",
-    "Description": "Mike DiSalvo sings the hardest - meanest Metal Vocals - and you can too!\r\n1.5hrs of crazy Cryptopsy Thrash Metal vocals - enough to turn the most Emo of you into legends!",
-    "Prerequisite": "Must have a beard OR at least 4 piercings..",
-    "Note": "beer welcome",
-    "ExtraInformation": "",
-    "AgeMin": 18,
-    "AgeMax": 99,
-    "AgeInMonths": false,
-    "EffectiveBirthDay": null,
-    "Sex": null,
-    "Price": 25,
-    "TaxStatus": 0,
-    "MaxAttendance": 3,
-    "MaxPreAttendance": 2147483647,
-    "ReservedPlaces": 0,
-    "Location": "Mike D's Palace",
-    "ResponsibleName": "Mike DiSalvo",
-    "NbSegments": 136,
-    "HasDropInEnabled": false,
+    "TaxCredit": null,
+    "SpotsRemaining": 2147483639,
+    "SpotsReserved": 8,
+    "ShortScheduleString": "Tuesday",
     "HasSessionEnabled": true,
-    "NbPlacesLeft": null,
-    "Schedule": {
-      "Id": 933696,
-      "TimePeriod": {
-        "Id": 933696,
-        "StartTime": "09:00:00",
-        "EndTime": "10:30:00",
-        "Type": 2,
-        "DayMask": 8,
-        "StartDate": "2014-01-07T00:00:00",
-        "EndDate": null,
-        "NbOccurences": 136,
-        "RecurrenceEndDate": "2016-09-04T00:00:00",
-        "TimePeriodType": 2
-      },
-      "Address": null
-    },
-    "ShortBeginString": null,
-    "Url": null,
-    "SubCategoryId": 623622,
-    "Position": 0,
-    "State": 0
+    "AgeSummary": "4-16",
+    "SubCategoryName": "ART LESSONS",
+    "CategoryName": "General Courses",
+    "ProgramName": "Recreational Events / Activities "
   }
-]
-					</pre>
-					<br/>
-
+  {
+    "Id": 593490,
+    "Name": "Pottery Class",
+    "Description": "Pottery classes in our building",
+    "ResponsibleName": "Alastair Monk",
+    "Prerequisite": "must bring clay",
+    "Note": "Picasso won't be there - but Mr Rogers will be there - who is nearly as good",
+    "ExtraInformation": "",
+    "Url": "https://www.amilia.com/store/en/usa-amilia-group/shop/activities/593490",
+    "LegacyLocation": "Amilia Building",
+    "Price": 99.0000,
+    "Schedule": [
+      {
+        "StartTime": "11:00:00",
+        "EndTime": "00:00:00",
+        "StartDate": "2014-03-05T00:00:00",
+        "EndDate": null,
+        "RecurenceEndDate": "2014-03-31T00:00:00",
+        "Occurences": 0,
+        "Staff": [
+          
+        ],
+        "Facilities": [
+          
+        ],
+        "ExceptOccurences": [
+          
+        ],
+        "Days": [
+          "Thursday"
+        ]
+      }
+    ],
+    "Age": {
+      "Max": 99,
+      "Min": 11,
+      "Months": false
+    },
+    "TaxCredit": null,
+    "SpotsRemaining": 2147483638,
+    "SpotsReserved": 9,
+    "ShortScheduleString": "Thursday 11:00 AM",
+    "HasSessionEnabled": true,
+    "AgeSummary": "11-99",
+    "SubCategoryName": "ART LESSONS",
+    "CategoryName": "General Courses",
+    "ProgramName": "Recreational Events / Activities "
+  }
+]</pre>
+                        </div>
+                    </section>
+   
 				</div>
+                 <nav class="col-md-2">
+                    <ul id="sidebar" class="nav nav-stacked fixed">
+                        <li><a href="#concepts-section">Concepts</a></li>
+                        <li><a href="#programs-section">Programs</a>
+                            <ul class="nav nav-stacked">
+                                <li><a href="#programs-list">List</a></li>
+                                <li><a href="#programs-get">Get</a></li>
+                                <li><a href="#programs-get-activities">List activities</a></li>
+                                
+                            </ul>
+                        </li>
+                        <li role="presentation"><a href="#activities-section">Activities</a>
+                            <ul class="nav nav-stacked">
+                                <li><a href="#activities-get">Get</a></li>
+                            </ul>
+                        </li>
+                        <li role="presentation"><a href="#tags-section">Tags</a>
+                            <ul class="nav nav-stacked">
+                                <li><a href="#tags-list">List</a></li>
+                                <li><a href="#tags-get">Get</a></li>
+                                <li><a href="#tags-list-activities">List activities</a></li>
+                                
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
 			</div>
 		</div>
+
 		<footer>
 			<div class="container">
-				<p class="pull-left">&copy; 2016 <a href="https://www.amilia.com/en">Amilia Inc.</a></p>
+				<p class="pull-left">&copy; 2017 <a href="https://www.amilia.com/en">Amilia Inc.</a></p>
 				<p class="pull-right">Embed your Amilia Store using an IFRAME. <a href="https://github.com/AmiliaApp/amilia-demo-organization">Follow instructions on Github.</a></p>
 			</div>
 		</footer>

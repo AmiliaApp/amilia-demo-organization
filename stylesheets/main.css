@@ -57,3 +57,24 @@ footer a:hover,
 footer a:focus {
 	color: #333;
 }
+
+.fixed {
+    position:fixed;
+}
+
+#sidebar li > a {
+    padding: 2px 15px;
+}
+
+#sidebar > li >  ul {
+    padding-left: 20px;
+}
+
+#sidebar li {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.api-method + .api-method {
+    margin-top: 50px;
+}
