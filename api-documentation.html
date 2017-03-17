@@ -52,7 +52,7 @@
                         </p>
                         <h3>Pagination</h3>
                         <p>
-                            Some endpoints do pagination using cursors.
+                            Some endpoints do pagination using cursors, these will be marked with a <span class="label label-info">paged</span> label.
                             Paginated responses should all follow the following form;
                             
                             <pre>
@@ -65,7 +65,7 @@
 }
                             </pre>
 
-                            Items should contain a list of the requested items. 
+                            Items should contain a list of the requested items.
                             Page.Next is meant to be the url to request the next page of data. This field is null if there's no more data to fetch.
 
                             A limit query string parameter can always be used to control the page size, allowing some kind of control over the expected payload response.
