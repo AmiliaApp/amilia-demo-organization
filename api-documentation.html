@@ -474,7 +474,52 @@
 ]</pre>
                         </div>
                     </section>
-   
+                    <hr />
+                    <section id="events-section">
+                        <h1>Events</h1>
+                        <div id="events-list" class="api-method">
+                            <h2>Fetch the list of activity events for active programs</h2>    
+                            <p><code>/PublicApi/[RewriteUrl]/[Lang]/Events[?start=date[&amp;end=date]]</code></p>
+                            <p>
+                                Retrieves all activity events occuring in the active programs, for the given date range.
+                                Arguments <code>start</code> and <code>end</code> are dates formatted as <code>YYYY-MM-DD</code>. If <code>end</code> is omitted, retrieves only for one day specified by <code>start</code>. When both <code>start</code> and <code>end</code> are omitted, returns events for today.
+                                This call is useful to build a calendar. Output is compatible with <a href="https://fullcalendar.io/" target="_blank">FullCalendar</a>.
+                            </p>
+                            <h3>Example</h3>
+                            <pre>$.get('https://www.amilia.com/PublicApi/usa-amilia-group/en/Events?start=2013-10-28');</pre>
+                            <h3>Result</h3>
+                            <pre>
+[
+  {
+    "id": 2212779,
+    "start": "2013-10-28T20:00:00.01",
+    "end": "2013-10-28T21:00:00",
+    "allDay": false,
+    "title": "Badminton",
+    "url": "https://www.amilia.com/store/fr/usa-amilia-group/shop/activities/593501",
+    "state": "Normal",
+    "Type": "activity-segment",
+    "AttendanceString": null,
+    "HasPlaceLeft": false,
+    "CanRegister": false,
+    "CanUnregister": false,
+    "HasPassed": true,
+    "Price": null,
+    "ActivityId": 593501,
+    "ActivityName": "Badminton",
+    "SubCategoryId": 593500,
+    "SubCategoryName": "SPORT LESSONS",
+    "CategoryId": 593486,
+    "CategoryName": "General Courses",
+    "ProgramId": 8688,
+    "ProgramName": "Recreational Events / Activities ",
+    "Location": "",
+    "Tags": []
+  }
+]</pre>
+                        </div>
+                    </section>
+
 				</div>
                  <nav class="col-md-2">
                     <ul id="sidebar" class="nav nav-stacked fixed">
@@ -498,6 +543,11 @@
                                 <li><a href="#tags-get">Get</a></li>
                                 <li><a href="#tags-list-activities">List activities</a></li>
                                 
+                            </ul>
+                        </li>
+                        <li role="presentation"><a href="#events-section">Events</a>
+                            <ul class="nav nav-stacked">
+                                <li><a href="#events-list">List</a></li>
                             </ul>
                         </li>
                     </ul>
