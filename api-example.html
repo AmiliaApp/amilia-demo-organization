@@ -30,9 +30,10 @@
 				    center: 'title',
 				    right: 'prev,next'
 				  },
-				  defaultDate: moment('2013-10-01')
+				  defaultDate: moment('2013-11-01'),
+					scrollTime: '08:00:00'
 				});
-				$.get('https://www.amilia.com/PublicApi/usa-amilia-group/en/Events?start=2013-10-28').done(function(events) {
+				$.get('https://www.amilia.com/PublicApi/usa-amilia-group/en/Events?start=2013-11-08').done(function(events) {
 				  var $ul = $('ul#day-events');
 				  for (var i = 0; i < events.length; i++) {
 				    var event = events[i];
@@ -211,7 +212,7 @@ $(document).ready(function() {
 								And by using this Javascript:
 							</p>
 							<pre>
-$.get('https://www.amilia.com/PublicApi/usa-amilia-group/en/Events?start=2013-10-28').done(function(events) {
+$.get('https://www.amilia.com/PublicApi/usa-amilia-group/en/Events?start=2013-11-08').done(function(events) {
   var $ul = $('ul#day-events');
   for (var i = 0; i < events.length; i++) {
     var event = events[i];
@@ -258,7 +259,8 @@ $('#calendar').fullCalendar({
     left: 'month,agendaWeek,agendaDay',
     center: 'title',
     right: 'prev,next',
-		defaultDate: moment('2013-10-01')
+		defaultDate: moment('2013-11-01'),
+		scrollTime: '08:00:00'
   }
 });
 							</pre>
