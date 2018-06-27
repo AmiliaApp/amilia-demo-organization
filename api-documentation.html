@@ -517,12 +517,111 @@
     "ProgramId": 8688,
     "ProgramName": "Recreational Events / Activities ",
     "Location": "",
+    "Facilities": [],
     "Tags": []
   }
 ]</pre>
+                            <div class="alert alert-warning">
+                              <strong>Note:</strong> Attribute <code>Location</code> as been replaced with <code>Facilities</code>.
+                              Attribute <code>Location</code> will be removed so please update your code.
+                            </div>
                         </div>
                     </section>
-
+                    <hr />
+                    <section id="facilities-section">
+                        <h1>Facilities</h1>
+                        <div id="facilities-list" class="api-method">
+                            <h2>List available facilities</h2>
+                            <p><code>/PublicApi/[RewriteUrl]/[Lang]/Facilities</code></p>
+                            <p>Lists all the facilities that have been defined for your organization</p>
+                            <h4>Example</h4>
+                            <pre>$.get('https://www.amilia.com/PublicApi/usa-amilia-group/en/Facilities')</pre>
+                            <h4>Result</h4>
+                            <pre>[
+  {
+    "ParentId": 0,
+    "Description": "Centre sportif principal",
+    "State": "Normal",
+    "Id": 606,
+    "Name": "Centre Sportif",
+    "Address": {
+      "Latitude": null,
+      "Longitude": null,
+      "Telephone": "",
+      "AddressLine1": "",
+      "AddressLine2": "",
+      "City": "",
+      "ZipPostalCode": "",
+      "StateProvince": "",
+      "Country": ""
+    }
+  },
+  {
+    "ParentId": 606,
+    "Description": null,
+    "State": "Normal",
+    "Id": 1313,
+    "Name": "Aile A",
+    "Address": {
+      "Latitude": null,
+      "Longitude": null,
+      "Telephone": "",
+      "AddressLine1": "",
+      "AddressLine2": "",
+      "City": "",
+      "ZipPostalCode": "",
+      "StateProvince": "",
+      "Country": ""
+    }
+  },
+  {
+    "ParentId": 606,
+    "Description": null,
+    "State": "Normal",
+    "Id": 1314,
+    "Name": "Aile B",
+    "Address": {
+      "Latitude": null,
+      "Longitude": null,
+      "Telephone": "",
+      "AddressLine1": "",
+      "AddressLine2": "",
+      "City": "",
+      "ZipPostalCode": "",
+      "StateProvince": "",
+      "Country": ""
+    }
+  }
+]</pre>
+                        </div>
+                        <div id="facilities-get" class="api-method">
+                            <h2>Fetch a facility by id</h2>
+                            <p><code>/PublicApi/[RewriteUrl]/[Lang]/Facilities/[Id]</code></p>
+                            <p>Simply fetches a facility by id</p>
+                            <h4>Example</h4>
+                            <pre>$.get('https://www.amilia.com/PublicApi/usa-amilia-group/en/Facilities/606')</pre>
+                            <h4>Result</h4>
+                            <pre>{
+  "ParentId": 0,
+  "Description": "Centre sportif principal",
+  "State": "Normal",
+  "Id": 606,
+  "Name": "Centre Sportif",
+  "Address": {
+    "Latitude": null,
+    "Longitude": null,
+    "Telephone": "",
+    "AddressLine1": "",
+    "AddressLine2": "",
+    "City": "",
+    "ZipPostalCode": "",
+    "StateProvince": "",
+    "Country": ""
+  }
+}</pre>
+                        </div>
+                    </section>
+                    <hr />
 				</div>
                  <nav class="col-md-2">
                     <ul id="sidebar" class="nav nav-stacked fixed">
@@ -545,12 +644,17 @@
                                 <li><a href="#tags-list">List</a></li>
                                 <li><a href="#tags-get">Get</a></li>
                                 <li><a href="#tags-list-activities">List activities</a></li>
-                                
                             </ul>
                         </li>
                         <li role="presentation"><a href="#events-section">Events</a>
                             <ul class="nav nav-stacked">
                                 <li><a href="#events-list">List</a></li>
+                            </ul>
+                        </li>
+                        <li role="presentation"><a href="#facilities-section">Facilities</a>
+                            <ul class="nav nav-stacked">
+                                <li><a href="#facilities-list">List</a></li>
+                                <li><a href="#facilities-get">Get</a></li>
                             </ul>
                         </li>
                     </ul>
