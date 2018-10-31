@@ -139,8 +139,9 @@
                                 <thead>
                                     <tr><td>option name</td><td>default value (if not specified)</td><td>min/max values</tr>
                                 <tbody>
-                                    <tr><td>limit</td><td>100</td><td>5-100</td><td>how many activities to return per page</td></tr>
+                                    <tr><td>limit</td><td>250</td><td>5-250</td><td>how many activities to return per page</td></tr>
                                     <tr><td>idStart</td><td>0</td><td></td><td>minimum activity id to return</td></tr>
+                                    <tr><td>showHidden</td><td><code>false</code></td><td><code>true</code> or <code>false</code></td><td>indicates whether to return hidden activities</td></tr>
                                 </tbody>
                             </table></p>
                             <h4>Example</h4>
@@ -486,6 +487,7 @@
                                 You can also limit the search to a given program given the <code>programId</code> argument.
                                 You can list hidden activities by passing <code>showHidden=true</code>.
                                 This call is useful to build a calendar. Output is compatible with <a href="https://fullcalendar.io/" target="_blank">FullCalendar</a>.
+                                The result will be sorted by start date and time.
                             </p>
                             <div class="alert alert-warning">
                               Note: For performance reasons, the date range is limited to 50 days, enough to cover a month view in FullCalendar.
