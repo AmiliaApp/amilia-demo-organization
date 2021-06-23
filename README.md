@@ -5,8 +5,6 @@ This demo site demonstrates how easy it is to embed your Amilia Store inside you
 
 We have created a sample site. Check out the Amilia Demo Organization called ABC Sports: http://amiliaapp.github.io/amilia-demo-organization/.
 
-Go to our support site for instructions:
-http://support.amilia.com/hc/en-us/articles/200990565-Store-Embedding
 
 Reporting issues
 ----------------
