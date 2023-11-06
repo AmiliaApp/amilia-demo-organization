@@ -1,0 +1,5 @@
+nav#store-navigation div.main-nav ul.nav-pills>li.active {
+    font-weight: 1000;
+    font-style: italic;
+    color: pink;
+}
